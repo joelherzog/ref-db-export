@@ -80,14 +80,14 @@ let imageUrls = [
   // Add more URLs as needed
 ];
 
-/*
-document.getElementById('loadButton').addEventListener('click', function() {
-  preloadImages(imageUrls, function() {
-      console.log("All images preloaded");
-      createLogoSlide(imageUrls);
-  });
-});
-*/
+
+// document.getElementById('loadButton').addEventListener('click', function() {
+//  preloadImages(imageUrls, function() {
+//      console.log("All images preloaded");
+//      createLogoSlide(imageUrls);
+//  });
+//});
+
 
 function createLogoSlide(imageUrls) {
   console.log(imageUrls)
