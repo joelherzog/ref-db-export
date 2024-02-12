@@ -23,62 +23,27 @@ pptx.defineSlideMaster({
   ],
 });
 
-function preloadImages(urls, callback) {
-  let loadedCounter = 0;
-  let images = [];
+function preloadImages(urls) {
+  // Create a promise that resolves when all images are loaded
+  return new Promise((resolve, reject) => {
+    let loadedCounter = 0;
+    let images = [];
 
-  for (let i = 0; i < urls.length; i++) {
-      images[i] = new Image();
-      images[i].onload = function() {
-          loadedCounter++;
-          if (loadedCounter === urls.length) {
-              callback(); // Call the callback function when all images are loaded
-          }
+    urls.forEach((url, index) => {
+      images[index] = new Image();
+      images[index].onload = () => {
+        loadedCounter++;
+        // If all images are loaded, resolve the promise
+        if (loadedCounter === urls.length) {
+          resolve(images); // Resolve with the array of loaded images
+        }
       };
-      images[i].src = urls[i];
-  }
+      images[index].onerror = reject; // Reject the promise on an error
+      images[index].src = url;
+    });
+  });
 }
 
-
-let imageUrls = [
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/logos/color/image%2079.jpg',
-  // Add more URLs as needed
-];
 
 
 function createLogoSlide(imageUrls) {
