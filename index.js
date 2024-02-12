@@ -81,14 +81,6 @@ let imageUrls = [
 ];
 
 
-// document.getElementById('loadButton').addEventListener('click', function() {
-//  preloadImages(imageUrls, function() {
-//      console.log("All images preloaded");
-//      createLogoSlide(imageUrls);
-//  });
-//});
-
-
 function createLogoSlide(imageUrls) {
   console.log(imageUrls)
   
@@ -133,10 +125,7 @@ let projectExamples = [
   {heading: 'Project 5', rt: 'rich text', company_name_neutral: 'kjkdsf jkhsdf hs'},
   {heading: 'Project 6', rt: 'rich text', company_name_neutral: 'kjkdsf jkhsdf hs'},
 ];
-/*
-document.getElementById('exampleButton').addEventListener('click', function() {
-  createProjectExamples(projectExamples);
-*/
+
   function createProjectExamples(projectExamples) {
     let slide = pptx.addSlide({ masterName: "Default_ZMC" });
     let gridX = 0.5, gridY = 1.63, gridW = 9, gridH = 4;
@@ -443,10 +432,8 @@ const statement = [
   {rt: 'rich text', company_name: 'Test GmbH', name: 'Test Muster', position: 'CFO', image: 'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/zmc_logo.png'},
   {rt: 'rich text', company_name: 'Test Firma', name: 'Muster Test', position: 'CEO', image: 'https://tszpwpclmrfglzjncrjb.supabase.co/storage/v1/object/public/assets/zmc_logo.png'},
 ];
-/*
-document.getElementById('statementButton').addEventListener('click', function() { 
-  createStatments(statement);
-*/
+
+
   function createStatments(statement) {
   let slide = pptx.addSlide({ masterName: "Default_ZMC" });
             
