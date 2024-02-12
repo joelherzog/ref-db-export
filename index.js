@@ -188,7 +188,7 @@ let projectExamples = [
     }
 
     pptx.writeFile({ fileName: 'projectExample.pptx' });
-  }});
+  }
 
 
 
@@ -425,7 +425,6 @@ pptx.defineSlideMaster({
 
     pptx.writeFile({ fileName: 'referenceProject.pptx' });
   }
-});
 
 
 const statement = [
@@ -517,7 +516,7 @@ const statement = [
 
   slide.addImage({ path: statement[1].image, x:7.91, y: 3.31, w: 1.17, h: 1.17, rounding: true });
   pptx.writeFile({ fileName: 'statments.pptx' });
-}});
+}
 
 
 
