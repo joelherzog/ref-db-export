@@ -24,7 +24,6 @@ pptx.defineSlideMaster({
 });
 
 function preloadImages(urls) {
-  // Create a promise that resolves when all images are loaded
   return new Promise((resolve, reject) => {
     let loadedCounter = 0;
     let images = [];
@@ -33,16 +32,27 @@ function preloadImages(urls) {
       images[index] = new Image();
       images[index].onload = () => {
         loadedCounter++;
-        // If all images are loaded, resolve the promise
         if (loadedCounter === urls.length) {
-          resolve(images); // Resolve with the array of loaded images
+          resolve(images); // Successfully loaded all images
         }
       };
-      images[index].onerror = reject; // Reject the promise on an error
+      images[index].onerror = () => reject(new Error(`Failed to load image at ${url}`));
       images[index].src = url;
     });
   });
 }
+
+// Using the function
+preloadImages(imageUrls)
+  .then(images => {
+    console.log("All images preloaded");
+    // You can now use the loaded images or proceed with other operations
+    createLogoSlide(imageUrls);
+  })
+  .catch(error => {
+    console.error("An error occurred while loading images:", error);
+  });
+
 
 
 
