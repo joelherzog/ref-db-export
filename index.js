@@ -39,8 +39,6 @@ function preloadImages(urls, callback) {
   }
 }
 
-// Assuming wwLib.wwVariable.getValue is synchronous and returns the array of image URLs
-let imageUrls = wwLib.wwVariable.getValue('59581c14-f4ab-4129-b63e-1d011df90351');
 
 // Make sure imageUrls is an array and has content before calling preloadImages
 if (Array.isArray(imageUrls) && imageUrls.length > 0) {
