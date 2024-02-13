@@ -23,37 +23,35 @@ pptx.defineSlideMaster({
   ],
 });
 
-function preloadImages(urls) {
-  return new Promise((resolve, reject) => {
-    let loadedCounter = 0;
-    let images = [];
+function preloadImages(urls, callback) {
+  let loadedCounter = 0;
+  let images = [];
 
-    urls.forEach((url, index) => {
-      images[index] = new Image();
-      images[index].onload = () => {
-        loadedCounter++;
-        if (loadedCounter === urls.length) {
-          resolve(images); // Successfully loaded all images
-        }
+  for (let i = 0; i < urls.length; i++) {
+      images[i] = new Image();
+      images[i].onload = function() {
+          loadedCounter++;
+          if (loadedCounter === urls.length) {
+              callback(); // Call the callback function when all images are loaded
+          }
       };
-      images[index].onerror = () => reject(new Error(`Failed to load image at ${url}`));
-      images[index].src = url;
-    });
-  });
+      images[i].src = urls[i];
+  }
 }
 
-// Using the function
-preloadImages(imageUrls)
-  .then(images => {
-    console.log("All images preloaded");
-    // You can now use the loaded images or proceed with other operations
-    createLogoSlide(imageUrls);
-  })
-  .catch(error => {
-    console.error("An error occurred while loading images:", error);
-  });
+// Assuming wwLib.wwVariable.getValue is synchronous and returns the array of image URLs
+let imageUrls = wwLib.wwVariable.getValue('59581c14-f4ab-4129-b63e-1d011df90351');
 
-
+// Make sure imageUrls is an array and has content before calling preloadImages
+if (Array.isArray(imageUrls) && imageUrls.length > 0) {
+    preloadImages(imageUrls, function() {
+        console.log("All images preloaded");
+        // Execute further operations after images are loaded
+        createLogoSlide(imageUrls);
+    });
+} else {
+    console.log("No image URLs found or the variable does not contain an array.");
+}
 
 
 function createLogoSlide(imageUrls) {
